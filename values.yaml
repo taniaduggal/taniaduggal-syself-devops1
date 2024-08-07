@@ -1,0 +1,47 @@
+namespace: voting-app
+
+vote:
+  replicaCount: 2
+  image:
+    repository: dockersamples/examplevotingapp_vote
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 80
+
+result:
+  replicaCount: 2
+  image:
+    repository: dockersamples/examplevotingapp_result
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 80
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations: 
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  hosts:
+    - host: vote.taniainspire.cyou
+      paths:
+        - path: /
+          pathType: Prefix
+          service: vote
+    - host: result.taniainspire.cyou
+      paths:
+        - path: /
+          pathType: Prefix
+          service: result
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
