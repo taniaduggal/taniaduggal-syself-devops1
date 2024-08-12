@@ -44,7 +44,7 @@ helm list (to check helm all releases)
 
 ## Accessing the Application
 
-After deploying the chart, you can access the application at: http://<ingress-host>: NodePort
+After deploying the chart, you can access the application at: http://ingress-host: NodePort
 
 
 Replace <ingress-host> with the value specified in your ingress.host.
