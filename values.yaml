@@ -9,6 +9,7 @@ vote:
   service:
     type: NodePort
     port: 80
+    targetPort: 9000
 
 result:
   replicaCount: 2
